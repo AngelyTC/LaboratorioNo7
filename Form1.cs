@@ -91,5 +91,43 @@ namespace LaboratorioNo7
             LeerCliente();
             LeerPropiedad();
         }
+
+        private void btnOrdenarCuota_Click(object sender, EventArgs e)
+        {
+             registro = registro.OrderByDescending(n => n.cuotaMant).ToList();
+            dgtPropietario.DataSource = null;
+            dgtPropietario.Refresh();
+
+            dgtPropietario.DataSource = registro;
+            dgtPropietario.Refresh();
+        }
+
+        private void btnCuotas3_Click(object sender, EventArgs e)
+        {
+            int registrosOrden = registro.Count();
+  
+           label4.Text = "Cuotas más bajas: " + registro[registrosOrden - 1].cuotaMant.ToString() + " , " + registro[registrosOrden - 2].cuotaMant.ToString() + " , " + registro[registrosOrden - 3].cuotaMant.ToString();
+
+            label6.Text = "Cuotas más altas: " + registro[0].cuotaMant.ToString() + " , " + registro[1].cuotaMant.ToString() + " , " + registro[2].cuotaMant.ToString();
+
+        }
+
+        private void btnPropAlto_Click(object sender, EventArgs e)
+        {
+
+           CasasPropietario mostrar2 = new CasasPropietario();
+          
+                for (int j = 0; j < registro.Count; j++)
+                {
+                    int mayorCuota = registro.Max(u => u.cuotaMant);
+                    label8.Text = "La mayor cuota es de:  " + mayorCuota.ToString();
+                    if (mayorCuota == registro[j].cuotaMant)
+                    {
+                        label9.Text = "del propietario:  " +  registro[j].nombre;
+                    }
+                }
+               
+              
+        }
     }
 }
